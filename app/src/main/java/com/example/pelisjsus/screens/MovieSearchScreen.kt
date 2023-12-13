@@ -130,6 +130,7 @@ fun MovieSearchScreen() {
     }
 }
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun MovieDetails(movie: MoviesItem) {
     val painter = rememberAsyncImagePainter(
