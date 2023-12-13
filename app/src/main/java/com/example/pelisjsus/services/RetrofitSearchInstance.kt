@@ -6,11 +6,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitSearchInstance {
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://161.132.41.18:5000")
+        .baseUrl("http://172.22.149.210:5000")
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val movieApiService = retrofit.create(MovieSearchService::class.java)
+    val memeApiService = retrofit.create(MemeSearchService::class.java)
 
 }

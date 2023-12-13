@@ -1,3 +1,3 @@
 package com.example.pelisjsus.models
 
-class Movies : ArrayList<MoviesItem>()
+class Memes : ArrayList<MemesItem>()

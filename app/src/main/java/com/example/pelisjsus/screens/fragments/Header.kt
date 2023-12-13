@@ -57,13 +57,13 @@ fun AHeader() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.mipmap.ic_launcher_foreground),
+                painter = painterResource(id = R.mipmap.dicciomeme_foreground),
                 contentDescription = null,
                 modifier = Modifier
                     .size(70.dp)
             )
             Text(
-                text = "Puntúa tu película",
+                text = "El DiccioMeme",
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFEF5350),
                 modifier = Modifier,

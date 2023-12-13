@@ -1,22 +1,22 @@
 package com.example.pelisjsus.repository
 
 import android.annotation.SuppressLint
-import com.example.pelisjsus.models.MoviesItem
+import com.example.pelisjsus.models.MemesItem
 import com.example.pelisjsus.services.RetrofitSearchInstance
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class MovieSearchRepository {
-    private val movieApiService = RetrofitSearchInstance.movieApiService
+class MemeSearchRepository {
+    private val memeApiService = RetrofitSearchInstance.memeApiService
 
     @SuppressLint("CheckResult")
-    fun searchMovie(title: String, onResult: (MoviesItem) -> Unit) {
-        movieApiService.searchMovies(title)
+    fun searchMeme(title: String, onResult: (MemesItem) -> Unit) {
+        memeApiService.searchMemes(title)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { movieResponse ->
-                    onResult(movieResponse)
+                { memeResponse ->
+                    onResult(memeResponse)
                 },
                 { error ->
                     // Handle error if needed

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -39,19 +38,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.example.pelisjsus.models.Movies
-import com.example.pelisjsus.models.MoviesItem
+import com.example.pelisjsus.models.Memes
+import com.example.pelisjsus.models.MemesItem
 import com.example.pelisjsus.services.RetrofitInstance
 
 
 @SuppressLint("MutableCollectionMutableState")
 @Composable
 fun MovieList() {
-    var movies by remember { mutableStateOf<Movies?>(null) }
+    var memes by remember { mutableStateOf<Memes?>(null) }
     LaunchedEffect(Unit) {
         try {
-            val response = RetrofitInstance.movieService.getMovie()
-            movies = response
+            val response = RetrofitInstance.memeService.getMeme()
+            memes = response
         } catch (e: Exception) {
             println("Error $e")
         }
@@ -64,16 +63,16 @@ fun MovieList() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        itemsIndexed(items = movies ?: emptyList()) { index, movie ->
-            MovieItem(movie, index)
+        itemsIndexed(items = memes ?: emptyList()) { index, meme ->
+            MovieItem(meme, index)
         }
     }
 }
 
 @Composable
-fun MovieItem(movie: MoviesItem, index: Int) {
+fun MovieItem(meme: MemesItem, index: Int) {
     val painter = rememberAsyncImagePainter(
-        ImageRequest.Builder(LocalContext.current).data(data = movie.banner).apply(block = fun ImageRequest.Builder.() {
+        ImageRequest.Builder(LocalContext.current).data(data = meme.banner).apply(block = fun ImageRequest.Builder.() {
         }).build())
     Card (
         modifier = Modifier
@@ -94,7 +93,7 @@ fun MovieItem(movie: MoviesItem, index: Int) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = movie.titulo,
+                    text = meme.title,
                     style = MaterialTheme.typography.titleMedium,
                     fontSize = 19.sp,
                     color = Color.White,
@@ -111,7 +110,7 @@ fun MovieItem(movie: MoviesItem, index: Int) {
                     contentScale = ContentScale.Crop
                 )
                 Row {
-                    repeat(movie.puntuacion.toInt()) {
+                    repeat(meme.score.toInt()) {
                         Icon(
                             imageVector = Icons.Default.Star,
                             contentDescription = null,

@@ -42,27 +42,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.example.pelisjsus.models.MoviesItem
-import com.example.pelisjsus.services.MovieSearchService
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.pelisjsus.models.MemesItem
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.pelisjsus.repository.MovieSearchRepository
+import com.example.pelisjsus.repository.MemeSearchRepository
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieSearchScreen() {
     var searchQuery by remember { mutableStateOf("") }
-    var movie by remember { mutableStateOf<MoviesItem?>(null) }
-    val searchMovie = MovieSearchRepository()
+    var meme by remember { mutableStateOf<MemesItem?>(null) }
+    val searchMeme = MemeSearchRepository()
 
     Column(
         modifier = Modifier
@@ -95,14 +88,14 @@ fun MovieSearchScreen() {
             ),
         )
 
-        movie?.let { MovieDetails(movie = it) }
+        meme?.let { MovieDetails(movie = it) }
 
         Button(
             onClick = {
                 if (searchQuery.isNotEmpty()) {
                     try {
-                        searchMovie.searchMovie(searchQuery) { result ->
-                            movie = result
+                        searchMeme.searchMeme(searchQuery) { result ->
+                            meme = result
                         }
                     } catch(e: Exception) {
                         println("Error $e")
@@ -132,7 +125,7 @@ fun MovieSearchScreen() {
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun MovieDetails(movie: MoviesItem) {
+fun MovieDetails(movie: MemesItem) {
     val painter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current).data(data = movie.banner).apply(block = fun ImageRequest.Builder.() {
         }).build())
@@ -166,20 +159,15 @@ fun MovieDetails(movie: MoviesItem) {
                         contentScale = ContentScale.Crop
                     )
                     Text(
-                        text = movie.descripcion,
+                        text = movie.description,
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.White,
                         fontSize = 15.sp
                     )
                     Spacer(modifier = Modifier.height(15.dp))
-                    Text(
-                        text = "Director: ${movie.director}",
-                        fontSize = 14.sp,
-                        color = Color(0XFFEF9A9A)
-                    )
                     Spacer(modifier = Modifier.height(13.dp))
                     Row {
-                        repeat(movie.puntuacion.toInt()) {
+                        repeat(movie.score.toInt()) {
                             Icon(
                                 imageVector = Icons.Default.Star,
                                 contentDescription = null,
@@ -188,12 +176,12 @@ fun MovieDetails(movie: MoviesItem) {
                             )
                         }
                     }
-                    when (movie.puntuacion) {
-                        in Int.MIN_VALUE..3 -> Text(text = "Hay mejores opciones", color = Color.Gray)
-                        in 4..6 -> Text(text = "Recomendada", color = Color.Gray)
-                        in 7..8 -> Text(text = "Tienes que verla", color = Color.Gray)
-                        10 -> Text(text = "Es la mejor película del mundo", color = Color.Gray)
-                        else -> Text(text = "No la veas", color = Color.Gray)
+                    when (movie.score) {
+                        in Int.MIN_VALUE..3 -> Text(text = "Hay mejores memes", color = Color.Gray)
+                        in 4..6 -> Text(text = "Gracioso", color = Color.Gray)
+                        in 7..8 -> Text(text = "Para reir un rato", color = Color.Gray)
+                        10 -> Text(text = "Es el mejor meme del mundo", color = Color.Gray)
+                        else -> Text(text = "No lo veas", color = Color.Gray)
                     }
                 }
             }
