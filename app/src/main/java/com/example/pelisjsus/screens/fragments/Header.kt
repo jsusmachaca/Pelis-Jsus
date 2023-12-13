@@ -60,7 +60,7 @@ fun AHeader() {
                 painter = painterResource(id = R.mipmap.ic_launcher_foreground),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(90.dp)
+                    .size(70.dp)
             )
             Text(
                 text = "Puntúa tu película",

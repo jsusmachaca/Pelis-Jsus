@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,42 +29,49 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.pelisjsus.screens.NavScreen
 
 @Composable
-fun Tags() {
+fun Tags(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
         // .padding(10.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        Tag("Tag 1", Icons.Default.Home, Color(0XFFEF9A9A))
-        Tag("Tag 2", Icons.Default.Search, Color(0XFFEF9A9A))
-        Tag("Tag 3", Icons.Default.Add, Color(0XFFEF9A9A))
+        Tag("Tag 1", Icons.Default.Home, Color(0XFFEF9A9A)) {
+            navController.navigate(NavScreen.Home.route)
+        }
+        Tag("Tag 2", Icons.Default.Search, Color(0XFFEF9A9A)) {
+            navController.navigate(NavScreen.MovieSearchScreen.route)
+        }
     }
 }
 
 @Composable
-fun Tag(text: String, icon: ImageVector, color: Color) {
+fun Tag(text: String, icon: ImageVector, color: Color, onClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(10.dp)
-            .width(90.dp)
-            .height(45.dp)
+            .width(80.dp)
+            .height(40.dp)
 
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onClick,
             colors = ButtonDefaults.buttonColors(Color(0XFF212121))
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = color,
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier.size(40.dp)
             )
         }
     }
 }
+
