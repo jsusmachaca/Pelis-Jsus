@@ -15,6 +15,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.pelisjsus.screens.Home
 import com.example.pelisjsus.screens.fragments.AHeader
 import com.example.pelisjsus.screens.fragments.Tags
@@ -30,6 +33,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun envoltorio() {
+    val navigation = rememberNavController()
     Column (
         Modifier
             .background(Color(0XFF000000))
@@ -49,7 +53,12 @@ fun envoltorio() {
         AHeader()
         Tags()
         Spacer(modifier = Modifier.width(16.dp))
-        Home()
+        NavHost(navController = navigation, startDestination = "homeScreen") {
+            composable("homeScreen") {
+                Home(navigation)
+            }
+
+        }
     }
 }
 

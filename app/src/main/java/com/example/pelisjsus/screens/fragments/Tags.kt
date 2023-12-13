@@ -16,6 +16,9 @@ import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -47,17 +50,20 @@ fun Tag(text: String, icon: ImageVector, color: Color) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(10.dp)
-            .clip(MaterialTheme.shapes.small)
-            .background(Color(0XFF212121))
             .width(90.dp)
             .height(45.dp)
 
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = color,
-            modifier = Modifier.size(50.dp)
-        )
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(Color(0XFF212121))
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = color,
+                modifier = Modifier.size(50.dp)
+            )
+        }
     }
 }

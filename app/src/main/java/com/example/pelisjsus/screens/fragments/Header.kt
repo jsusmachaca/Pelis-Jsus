@@ -50,17 +50,17 @@ fun AHeader() {
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
+                .fillMaxWidth(),
+                //.padding(4.dp),
             // horizontalArrangement = Arrangement.SpaceBetween,
-            horizontalArrangement = Arrangement.SpaceAround,
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = painterResource(id = R.mipmap.ic_launcher_foreground),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(90.dp)
             )
             Text(
                 text = "Puntúa tu película",
