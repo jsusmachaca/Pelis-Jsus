@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitSearchInstance {
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://172.22.149.210:5000")
+        .baseUrl("https://androapi-dev-ggte.4.us-1.fl0.io")
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
